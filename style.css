@@ -1,0 +1,25 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2e2e2e;
+}
+
+.window{
+    height: 700px;
+    width: 700px;
+    background-color: rgb(55, 178, 209);
+}
+.needle{
+    height: 100px;
+    width: 5px;
+    background: grey;
+    
+}
