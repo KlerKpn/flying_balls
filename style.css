@@ -12,14 +12,16 @@ body{
     background: #2e2e2e;
 }
 
-.window{
+#window{
     height: 700px;
     width: 700px;
     background-color: rgb(55, 178, 209);
+    position: relative;
 }
-.needle{
+#needle{
     height: 100px;
     width: 5px;
     background: grey;
-    
+    position: absolute;
+    top: 0;
 }
