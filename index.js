@@ -37,11 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const id = Math.floor(Math.random() * 10000000000)
             this.div.className = 'balls'
             this.div.setAttribute('style', `top: ${this.posY}px`)
+            this.div.setAttribute('style', `left: ${Ball.genPosX(min, max)}px`)
             this.div.setAttribute('id', id)
             this.interval = setInterval(() => {
+
                 const elem = document.getElementById(`${id}`)
                 this.posY = this.posY - 1
                 elem.style.top = `${this.posY}px`
+
                 if (elem.style.top < `${min}px`) {
                     elem.remove()
                     clearInterval(this.interval)
@@ -51,19 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return this.div
         }
 
-        static genPosX() {
-
+        static genPosX(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-
     }
 
     let genSpeed = 1000
 
-    // setInterval(() => {
-    //     const div = new Ball()
-    //     gameScreen.appendChild(div.start())
-    // }, genSpeed)
-
-    const div = new Ball()
-    gameScreen.appendChild(div.start())
+    setInterval(() => {
+        gameScreen.appendChild(new Ball().start())
+    }, genSpeed)
 })
