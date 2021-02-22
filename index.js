@@ -26,25 +26,38 @@ document.addEventListener("DOMContentLoaded", () => {
     class Ball {
         constructor(posX, posY, moveX, moveY) {
             this.posX = posX
-            this.posY = posY
+            this.posY = max
             this.moveY = moveY
             this.moveX = moveX
-            this.style = ` "color": "#2e2e2e"; 'border-radius': '99px';width':'30px'; 'height': '30px' `
+            this.startLine = max
+            this.div = document.createElement('div')
         }
 
         start() {
-            let div = document.createElement('div')
-            // setInterval(() => {
-            //     posY + 1
-            // }, 50)
-            return div
+            const id = Math.floor(Math.random()*10000000000)
+            this.div.className = 'balls'
+            this.div.setAttribute('style', `top: ${this.posY}px`)
+            this.div.setAttribute('id', id)
+            setInterval(() => {
+                this.posY = this.posY - 1
+                document.getElementById(`${id}`).style.top = `${this.posY}px`
+            }, 5)
+            return this.div
         }
+
+        static genPosX() {
+            
+        }
+
     }
 
     let genSpeed = 1000
 
-    setInterval(() => {
-        let div = new Ball()
-        gameScreen.appendChild(div.start())
-    }, genSpeed)
+    // setInterval(() => {
+    //     const div = new Ball()
+    //     gameScreen.appendChild(div.start())
+    // }, genSpeed)
+
+    const div = new Ball()
+    gameScreen.appendChild(div.start())
 })
