@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     class Ball {
         constructor(posX, posY, moveX, moveY) {
             this.posX = posX
-            this.posY = max
+            this.posY = max + 50
             this.moveY = moveY
             this.moveX = moveX
             this.startLine = max
@@ -34,19 +34,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         start() {
-            const id = Math.floor(Math.random()*10000000000)
+            const id = Math.floor(Math.random() * 10000000000)
             this.div.className = 'balls'
             this.div.setAttribute('style', `top: ${this.posY}px`)
             this.div.setAttribute('id', id)
-            setInterval(() => {
+            this.interval = setInterval(() => {
+                const elem = document.getElementById(`${id}`)
                 this.posY = this.posY - 1
-                document.getElementById(`${id}`).style.top = `${this.posY}px`
+                elem.style.top = `${this.posY}px`
+                if (elem.style.top < `${min}px`) {
+                    elem.remove()
+                    clearInterval(this.interval)
+                }
             }, 5)
+
             return this.div
         }
 
         static genPosX() {
-            
+
         }
 
     }
