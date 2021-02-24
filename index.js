@@ -2,8 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const max = 698
     const min = 0
     const speedNeedle = 15
+    let timer = 60
     let position = Math.ceil(max / 2)
 
+    let userScore = 0
+
+    const screenScore = document.getElementById('score')
     const gameScreen = document.getElementById('window')
     const needle = document.getElementById('needle')
     needle.setAttribute('style', `left:${position}px;`)
@@ -24,11 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     class Ball {
-        constructor(posX, posY, moveX, moveY) {
-            this.posX = posX
+        constructor() {
             this.posY = max + 50
-            this.moveY = moveY
-            this.moveX = moveX
             this.startLine = max
             this.div = document.createElement('div')
         }
@@ -45,9 +46,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.posY = this.posY - 1
                 elem.style.top = `${this.posY}px`
 
-                if (elem.style.top < `${min}px`) {
-                    elem.remove()
+                this.top = elem.style.top.replace('px', '')
+                if (this.top < (min - 100)) {
                     clearInterval(this.interval)
+                    elem.remove()
+                }
+
+                if (this.top <= 100 && this.top >= 80) {
+                    const x = parseInt(elem.style.left.replace('px', ''))
+                    if (position <= (x + 50) && position >= x) {
+                        userScore++
+                        screenScore.innerHTML = userScore
+                        clearInterval(this.interval)
+                        elem.remove()
+                    }
                 }
             }, 5)
 
@@ -61,7 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let genSpeed = 1000
 
+
     setInterval(() => {
-        gameScreen.appendChild(new Ball().start())
+        document.getElementById('timer').innerHTML = timer
+        timer > 0
+            ? gameScreen.appendChild(new Ball().start())
+            : alert('Ur score' + userScore)
+            timer --
     }, genSpeed)
+
 })
