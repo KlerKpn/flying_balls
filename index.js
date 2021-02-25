@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const id = Math.floor(Math.random() * 10000000000)
             this.div.className = 'balls'
             this.div.setAttribute('style', `top: ${this.posY}px`)
-            this.div.setAttribute('style', `left: ${Ball.genPosX(min, max)}px`)
+            this.div.setAttribute('style', `left: ${Ball.genPosX(min, max - 50)}px`)
             this.div.setAttribute('id', id)
-            this.interval = setInterval(() => {
 
+            this.interval = setInterval(() => {
                 const elem = document.getElementById(`${id}`)
                 this.posY = this.posY - 1
                 elem.style.top = `${this.posY}px`
@@ -71,15 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    let genSpeed = 1000
-
-
     setInterval(() => {
-        document.getElementById('timer').innerHTML = timer
+        if (timer > 0) {
+            document.getElementById('timer').innerHTML = timer
+            timer--
+        }
+    }, 1000)
+
+    let genSpeed = 1000
+    setInterval(() => {
         timer > 0
             ? gameScreen.appendChild(new Ball().start())
             : alert('Ur score' + userScore)
-            timer --
     }, genSpeed)
-
 })

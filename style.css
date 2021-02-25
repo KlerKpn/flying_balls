@@ -8,17 +8,25 @@
 body{
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #2e2e2e;
+    background: url(./assets/img/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;   
     max-height: 100vh;
     overflow-y: hidden;
+
+    font-size: 24px;
+    font-family: monospace;
+    
 }
 
 #window{
     height: 700px;
     width: 700px;
-    background-color: rgb(55, 178, 209);
+    background: rgba(0, 0, 0, 0.473);
     position: relative;
 }
 
@@ -31,10 +39,20 @@ body{
 }
 
 .balls{
+    opacity: .8;
     position: absolute;
-    background: #a344b6;
+    background: url(./assets/img/ball.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     border-radius: 99px;
     width:50px;
     height: 50px;
-    
+}
+.currentState{
+    padding: 5px;
+    width: 700px;
+    display: flex;
+    justify-content: space-around;
+    color: honeydew;
 }
